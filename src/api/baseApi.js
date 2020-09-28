@@ -43,7 +43,7 @@ function encodeData(params) {
     .join('&');
 }
 
-const makeQuerySlug = (endpint, params) => {
+const makeQuerySlug = (endpoint, params) => {
   const queryURL = encodeData(params);
   return `${endpoint}${queryURL ? '?' + queryURL : ''}`;
 };

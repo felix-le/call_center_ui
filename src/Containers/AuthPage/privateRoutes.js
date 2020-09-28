@@ -1,7 +1,7 @@
 import React, { lazy } from 'react';
 import { Redirect } from 'react-router-dom';
 
-const DashboardPage = lazy(() => import('../DashboardPage/DashboardPage'));
+const DashboardPage = lazy(() => import('../DashboardPage'));
 
 const privateRoutes = [
   {

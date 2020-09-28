@@ -2,7 +2,7 @@ import { lazy } from 'react';
 const LoginPage = lazy(() => import('./LoginPage'));
 const RegisterPage = lazy(() => import('./RegisterPage'));
 
-export const routes = [
+const routes = [
   {
     path: '/auth/login',
     exact: true,
@@ -16,3 +16,4 @@ export const routes = [
     component: RegisterPage,
   },
 ];
+export default routes;
