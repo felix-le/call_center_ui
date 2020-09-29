@@ -17,7 +17,6 @@ const mapDispatch = {
 
 const LoginPage = ({ loginPending, loginSuccess, loginError, login }) => {
   let history = useHistory();
-
   useEffect(() => {
     if (loginSuccess) {
       history.push('/');
@@ -25,16 +24,11 @@ const LoginPage = ({ loginPending, loginSuccess, loginError, login }) => {
   });
 
   async function onSubmit(data) {
-    console.log('onSubmit -> data', data);
     login({ email: data.email, password: data.password });
   }
   return (
     <div className={styles.loginPage}>
-      <Login
-        onSubmit={onSubmit}
-        isRequestLogin={loginPending}
-        loginError={loginError}
-      />
+      <Login onSubmit={onSubmit} isRequestLogin={loginPending} loginError={loginError} />
     </div>
   );
 };

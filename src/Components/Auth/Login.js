@@ -1,16 +1,7 @@
 import React, { memo } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { makeStyles } from '@material-ui/core/styles';
-import {
-  Card,
-  CardContent,
-  CardMedia,
-  Typography,
-  Divider,
-  Avatar,
-  Button,
-  TextField,
-} from '@material-ui/core';
+import { Card, CardContent, CardMedia, Typography, Button, TextField } from '@material-ui/core';
 import LockIcon from '@material-ui/icons/Lock';
 import gradients from '../../helpers/gradients';
 import authCover from '../../assets/img/auth_cover.jpg';
@@ -96,7 +87,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Login = ({ onSubmit, isRequestLogin, loginError }) => {
-  const { handleSubmit, errors, control, formState } = useForm({
+  const { handleSubmit, errors, control } = useForm({
     criteriaMode: 'firstError',
     mode: 'onSubmit',
   });
@@ -109,22 +100,15 @@ const Login = ({ onSubmit, isRequestLogin, loginError }) => {
     <Card className={classes.card}>
       <CardContent className={classes.content}>
         <LockIcon className={classes.icon} />
-        <Typography gutterBottom variant='h3'>
+        <Typography gutterBottom variant="h3">
           Đăng nhập
         </Typography>
-        <Typography variant='subtitle2'>
-          Đăng nhập vào trình quản lý email của Tadu.vn
-        </Typography>
-        <form
-          className={classes.loginForm}
-          action=''
-          noValidate
-          onSubmit={handleSubmit(onSubmit)}
-        >
+        <Typography variant="subtitle2">Đăng nhập vào trình quản lý email của Tadu.vn</Typography>
+        <form className={classes.loginForm} action="" noValidate onSubmit={handleSubmit(onSubmit)}>
           <div className={classes.fields}>
             <Controller
-              name='email'
-              type='email'
+              name="email"
+              type="email"
               control={control}
               defaultValue={defaultValues.email}
               rules={{
@@ -139,15 +123,15 @@ const Login = ({ onSubmit, isRequestLogin, loginError }) => {
                   error={errors && errors.email}
                   fullWidth
                   helperText={errors && errors.email && errors.email.message}
-                  label='Email'
-                  name='email'
-                  variant='outlined'
+                  label="Email"
+                  name="email"
+                  variant="outlined"
                   {...props}
                 />
               )}
             />
             <Controller
-              name='password'
+              name="password"
               control={control}
               defaultValue={defaultValues.password}
               rules={{
@@ -157,45 +141,29 @@ const Login = ({ onSubmit, isRequestLogin, loginError }) => {
                 <TextField
                   error={errors && errors.password}
                   fullWidth
-                  helperText={
-                    errors && errors.password && errors.password.message
-                  }
-                  label='Mật khẩu'
-                  name='password'
-                  type='password'
-                  variant='outlined'
+                  helperText={errors && errors.password && errors.password.message}
+                  label="Mật khẩu"
+                  name="password"
+                  type="password"
+                  variant="outlined"
                   {...props}
                 />
               )}
             />
           </div>
           <div className={classes.submitButtonWrapper}>
-            <Button
-              type='submit'
-              color='primary'
-              size='large'
-              fullWidth
-              variant='contained'
-            >
+            <Button type="submit" color="primary" size="large" fullWidth variant="contained">
               <span>{isRequestLogin ? 'Vui lòng đợi...' : 'Đăng nhập'} </span>
             </Button>
             {loginError && (
-              <Typography
-                className={classes.loginErrorText}
-                variant='error'
-                display='block'
-              >
+              <Typography className={classes.loginErrorText} variant="error" display="block">
                 Có lỗi khi đăng nhập
               </Typography>
             )}
           </div>
         </form>
       </CardContent>
-      <CardMedia
-        className={classes.media}
-        image={authCover}
-        title='Cover'
-      ></CardMedia>
+      <CardMedia className={classes.media} image={authCover} title="Cover"></CardMedia>
     </Card>
   );
 };

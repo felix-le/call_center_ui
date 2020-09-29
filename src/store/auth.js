@@ -39,18 +39,16 @@ const { loginPending, loginError, loginSuccess, getUser, logoutSuccess } = slice
 
 export const getUserFn = (userId) => async (dispatch) => {
   try {
-    dispatch(getUser(userId));
+    dispatch(getUser(userId)); //set user to state
   } catch (err) {
     return console.log(err);
   }
 };
 
 export const login = ({ email, password }) => async (dispatch) => {
-  console.log('login -> email, password ', email, password);
   try {
     dispatch(loginPending());
     const result = await loginApi({ email, password });
-    console.log('login -> result', result);
     dispatch(loginSuccess({ email, password }));
     localStorage.setItem(
       AUTH_KEY,
@@ -59,6 +57,7 @@ export const login = ({ email, password }) => async (dispatch) => {
         token: result.data.token,
       }),
     );
+    console.log('123123123');
   } catch (err) {
     dispatch(loginError());
     return console.error(err);
