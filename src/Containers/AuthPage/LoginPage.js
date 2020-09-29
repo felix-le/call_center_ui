@@ -26,7 +26,7 @@ const LoginPage = ({ loginPending, loginSuccess, loginError, login }) => {
 
   async function onSubmit(data) {
     console.log('onSubmit -> data', data);
-    await login({ email: data.email, password: data.password });
+    login({ email: data.email, password: data.password });
   }
   return (
     <div className={styles.loginPage}>

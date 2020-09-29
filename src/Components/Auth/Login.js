@@ -6,6 +6,8 @@ import {
   CardContent,
   CardMedia,
   Typography,
+  Divider,
+  Avatar,
   Button,
   TextField,
 } from '@material-ui/core';
@@ -94,112 +96,107 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Login = ({ onSubmit, isRequestLogin, loginError }) => {
-  const classes = useStyles();
   const { handleSubmit, errors, control, formState } = useForm({
     criteriaMode: 'firstError',
     mode: 'onSubmit',
   });
-
+  const classes = useStyles();
+  const defaultValues = {
+    email: '',
+    password: '',
+  };
   return (
-    <>
-      <Card className={classes.card}>
-        <h1>hello, please login</h1>
-
-        <form action='' noValidate onSubmit={handleSubmit(onSubmit)}>
-          <CardContent className={classes.content}>
-            <LockIcon className={classes.icon} />
-            <Typography gutterBottom variant='h3'>
-              Đăng nhập
-            </Typography>
-            <Typography variant='subtitle2'>
-              Đăng nhập vào trình quản lý các cuộc điện thoại
-            </Typography>
-            <form
-              className={classes.loginForm}
-              action=''
-              novalidate
-              onSubmit={handleSubmit(onSubmit)}
-            >
-              <div className={classes.fields}>
-                <Controller
-                  name='email'
-                  type='email'
-                  control={control}
-                  rules={{
-                    required: 'Vui lòng không để trống thông tin',
-                    pattern: {
-                      value: /\S+@\S+\.\S+/,
-                      message: 'Định dạng email không đúng',
-                    },
-                  }}
-                  render={(props) => (
-                    <TextField
-                      error={errors && errors.email}
-                      fullWidth
-                      helperText={
-                        errors && errors.email && errors.email.message
-                      }
-                      label='Email'
-                      name='email'
-                      variant='outlined'
-                      {...props}
-                    />
-                  )}
-                />
-                <Controller
-                  name='password'
-                  control={control}
-                  rules={{
-                    required: 'Vui lòng không để trống mật khẩu',
-                  }}
-                  render={(props) => (
-                    <TextField
-                      error={errors && errors.password}
-                      fullWidth
-                      helperText={
-                        errors && errors.password && errors.password.message
-                      }
-                      label='Mật khẩu'
-                      name='password'
-                      type='password'
-                      variant='outlined'
-                      {...props}
-                    />
-                  )}
-                />
-              </div>
-              <div className={classes.submitButtonWrapper}>
-                <Button
-                  type='submit'
-                  color='primary'
-                  size='large'
+    <Card className={classes.card}>
+      <CardContent className={classes.content}>
+        <LockIcon className={classes.icon} />
+        <Typography gutterBottom variant='h3'>
+          Đăng nhập
+        </Typography>
+        <Typography variant='subtitle2'>
+          Đăng nhập vào trình quản lý email của Tadu.vn
+        </Typography>
+        <form
+          className={classes.loginForm}
+          action=''
+          noValidate
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <div className={classes.fields}>
+            <Controller
+              name='email'
+              type='email'
+              control={control}
+              defaultValue={defaultValues.email}
+              rules={{
+                required: 'Vui lòng không để trống thông tin',
+                pattern: {
+                  value: /\S+@\S+\.\S+/,
+                  message: 'Định dạng email không đúng',
+                },
+              }}
+              render={(props) => (
+                <TextField
+                  error={errors && errors.email}
                   fullWidth
-                  variant='contained'
-                >
-                  <span>
-                    {isRequestLogin ? 'Vui lòng đợi...' : 'Đăng nhập'}
-                  </span>
-                </Button>
-                {loginError && (
-                  <Typography
-                    className={classes.loginErrorText}
-                    variant='error'
-                    display='block'
-                  >
-                    Có lỗi khi đăng nhập
-                  </Typography>
-                )}
-              </div>
-            </form>
-          </CardContent>
-          <CardMedia
-            className={classes.media}
-            image={authCover}
-            title='Cover'
-          ></CardMedia>
+                  helperText={errors && errors.email && errors.email.message}
+                  label='Email'
+                  name='email'
+                  variant='outlined'
+                  {...props}
+                />
+              )}
+            />
+            <Controller
+              name='password'
+              control={control}
+              defaultValue={defaultValues.password}
+              rules={{
+                required: 'Vui lòng không để trống mật khẩu',
+              }}
+              render={(props) => (
+                <TextField
+                  error={errors && errors.password}
+                  fullWidth
+                  helperText={
+                    errors && errors.password && errors.password.message
+                  }
+                  label='Mật khẩu'
+                  name='password'
+                  type='password'
+                  variant='outlined'
+                  {...props}
+                />
+              )}
+            />
+          </div>
+          <div className={classes.submitButtonWrapper}>
+            <Button
+              type='submit'
+              color='primary'
+              size='large'
+              fullWidth
+              variant='contained'
+            >
+              <span>{isRequestLogin ? 'Vui lòng đợi...' : 'Đăng nhập'} </span>
+            </Button>
+            {loginError && (
+              <Typography
+                className={classes.loginErrorText}
+                variant='error'
+                display='block'
+              >
+                Có lỗi khi đăng nhập
+              </Typography>
+            )}
+          </div>
         </form>
-      </Card>
-    </>
+      </CardContent>
+      <CardMedia
+        className={classes.media}
+        image={authCover}
+        title='Cover'
+      ></CardMedia>
+    </Card>
   );
 };
 

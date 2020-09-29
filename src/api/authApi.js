@@ -1,8 +1,8 @@
 import { axiosInstance } from './baseApi';
 
-export function loginApi({ username, password }) {
+export function loginApi({ email, password }) {
   return axiosInstance.post('/auth/login', {
-    email: username,
-    password,
+    email: email,
+    password: password,
   });
 }

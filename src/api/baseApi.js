@@ -1,8 +1,7 @@
 import axios from 'axios';
 import { AUTH_KEY } from '../constants/authConstant';
-
 const axiosInstance = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
+  baseURL: 'http://localhost:3001/api/v1',
   responseType: 'json',
 });
 
@@ -29,7 +28,7 @@ axiosInstance.interceptors.response.use(
       localStorage.removeItem(AUTH_KEY);
     }
     return Promise.reject(response);
-  }
+  },
 );
 
 function encodeData(params) {

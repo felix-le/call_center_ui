@@ -2,9 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { loginApi } from '../api/authApi';
 import { AUTH_KEY } from '../constants/authConstant';
 
-const initialUser = localStorage.getItem(AUTH_KEY)
-  ? JSON.parse(localStorage.getItem('user'))
-  : null;
+const initialUser = localStorage.getItem(AUTH_KEY) ? JSON.parse(localStorage.getItem('user')) : null;
 
 const slice = createSlice({
   name: AUTH_KEY,
@@ -37,13 +35,7 @@ const slice = createSlice({
 
 export default slice.reducer;
 
-const {
-  loginPending,
-  loginError,
-  loginSuccess,
-  getUser,
-  logoutSuccess,
-} = slice.actions;
+const { loginPending, loginError, loginSuccess, getUser, logoutSuccess } = slice.actions;
 
 export const getUserFn = (userId) => async (dispatch) => {
   try {
@@ -54,16 +46,18 @@ export const getUserFn = (userId) => async (dispatch) => {
 };
 
 export const login = ({ email, password }) => async (dispatch) => {
+  console.log('login -> email, password ', email, password);
   try {
     dispatch(loginPending());
     const result = await loginApi({ email, password });
+    console.log('login -> result', result);
     dispatch(loginSuccess({ email, password }));
     localStorage.setItem(
       AUTH_KEY,
       JSON.stringify({
         expired: parseFloat(result.data.expire) * 1000 + Date.now(),
         token: result.data.token,
-      })
+      }),
     );
   } catch (err) {
     dispatch(loginError());
